@@ -26,7 +26,6 @@
 | title              | string | null: false  |
 | price              | integer | null: false |
 | seller              | string | null: false  |
-| postage_id            | integer | null: false  |
 | category_id           | integer | null: false |
 | item_state_id         | integer | null: false |
 | delivery_charge_id    | integer | null: false |

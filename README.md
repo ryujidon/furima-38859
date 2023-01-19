@@ -17,7 +17,6 @@
 ### Association
   has_many :items
   has_many :buys
-  has_many :deliverys
 
 
 ## items テーブル
@@ -26,17 +25,17 @@
 | ------------------ | ------ | ------------------------- |
 | title              | string | null: false  |
 | price              | integer | null: false |
-| postage_id            | string | null: false  |
-| category_id         | integer | null: false |
-| item_state_id         | string | null: false |
-| place_id            | string | null: false |
-| delivery_date_id      | string | null: false |
-| user               | references | null: false, foreign_key: true |
+| postage_id            | integer | null: false  |
+| category_id           | integer | null: false |
+| item_state_id         | integer | null: false |
+| delivery_charge_id    | integer | null: false |
+| place_id              | integer | null: false |
+| delivery_date_id      | integer | null: false |
+| user                | references | null: false, foreign_key: true |
 
 ### Association
   belongs_to :user
   has_one :buy
-  has_one :delivery
 
 
 
@@ -46,28 +45,23 @@
 | ------------------ | ------ | ------------------------- |
 | user               | references  | null: false, foreign_key: true |
 | item              | references  | null: false, foreign_key: true |
-| delivery          | references  | null: false, foreign_key: true |
 
 ### Association
   belongs_to :item
   belongs_to :user
   has_one :delivery
 
-## delivery テーブル
+## deliverys テーブル
 
 | Column             | Type   | Options                   |
 | ------------------ | ------ | ------------------------- |
 | postal_code        | string | null: false  |
-| place_id         | string | null: false |
+| place_id         | integer | null: false |
 | city               | string | null: false |
 | address            | string | null: false  |
 | building_name      | string | |
 | telephone          | string | null: false |
-| user               | references  | null: false, foreign_key: true |
-| item              | references  | null: false, foreign_key: true |
 
 ### Association
-  belongs_to :item
-  belongs_to :user
   belongs_to :buy
 

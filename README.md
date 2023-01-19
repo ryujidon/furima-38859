@@ -25,6 +25,7 @@
 | ------------------ | ------ | ------------------------- |
 | title              | string | null: false  |
 | price              | integer | null: false |
+| seller              | string | null: false  |
 | postage_id            | integer | null: false  |
 | category_id           | integer | null: false |
 | item_state_id         | integer | null: false |
@@ -51,7 +52,7 @@
   belongs_to :user
   has_one :delivery
 
-## deliverys テーブル
+## deliveries テーブル
 
 | Column             | Type   | Options                   |
 | ------------------ | ------ | ------------------------- |
@@ -61,6 +62,7 @@
 | address            | string | null: false  |
 | building_name      | string | |
 | telephone          | string | null: false |
+| buy                | references | null: false, foreign_key: true |
 
 ### Association
   belongs_to :buy

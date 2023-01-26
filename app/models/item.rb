@@ -11,14 +11,13 @@ class Item < ApplicationRecord
 
 
   validates :title,             presence: true
-  validates :price,             presence: true ,numericality: {greater_than: 300,less_than: 9999999},format: { with: /\A[0-9]+\z/, message: 'は半角で入力してください' }
+  validates :price,             presence: true ,numericality: {greater_than: 300,less_than: 9999999 ,only_integer: true}
   validates :explanation,       presence: true
   validates :category_id,       numericality: { other_than: 1 , message: "can't be blank"} 
   validates :item_state_id,     numericality: { other_than: 1 , message: "can't be blank"} 
   validates :delivery_charge_id, numericality: { other_than: 1 , message: "can't be blank"} 
   validates :place_id,          numericality: { other_than: 1 , message: "can't be blank"} 
   validates :delivery_date_id,  numericality: { other_than: 1 , message: "can't be blank"} 
-  validates :user,              presence: true  
   validates :image,              presence: true  
 
 

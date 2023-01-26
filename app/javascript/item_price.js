@@ -8,7 +8,7 @@ const addTaxDomValue = Math.floor(inputValue*0.1);
 addTaxDom.innerHTML = addTaxDomValue;
 
 const addProfitDom = document.getElementById('profit');
-addProfitDom.innerHTML = (inputValue - addTaxDomValue);
+addProfitDom.innerHTML = Math.floor(inputValue - addTaxDomValue);
 
 })
 });

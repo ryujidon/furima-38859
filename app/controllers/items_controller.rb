@@ -25,9 +25,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-
-    unless user_item
-    end
   end  
 
   def update

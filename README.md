@@ -51,7 +51,7 @@
   belongs_to :user
   has_one :delivery
 
-## deliveries テーブル
+## send_addresses テーブル
 
 | Column             | Type   | Options                   |
 | ------------------ | ------ | ------------------------- |

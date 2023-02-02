@@ -66,3 +66,5 @@
 ### Association
   belongs_to :buy
 
+
+

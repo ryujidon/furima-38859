@@ -1,4 +1,4 @@
-class BuySendAddress
+class OrderSendAddress
   include ActiveModel::Model
   attr_accessor :postal_code, :place_id, :city,:address, :building_name,:telephone,:user_id,:item_id
 
@@ -11,8 +11,8 @@ class BuySendAddress
 
     def save
 
-      Buy = Buy.create(price: price, user_id: user_id ,:item_id item_id )
+      Order = Order.create(price: price, user_id: user_id ,:item_id item_id )
 
-      SendAddress.create(postal_code: postal_code, place_id: place_id, city: city, address: address, building_name: building_name, telephone: telephone, buy_id: buy.id)
+      SendAddress.create(postal_code: postal_code, place_id: place_id, city: city, address: address, building_name: building_name, telephone: telephone, order_id: order.id)
     end
 end

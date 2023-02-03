@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 2023_02_01_113236) do
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "price", null: false
     t.bigint "user_id", null: false
     t.bigint "item_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -60,13 +59,15 @@ ActiveRecord::Schema.define(version: 2023_02_01_113236) do
 
   create_table "send_addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "postal_code", null: false
-    t.integer "prefecture", null: false
-    t.string "city"
-    t.string "house_number"
+    t.integer "place_id", null: false
+    t.string "city", null: false
+    t.string "address", null: false
     t.string "building_name"
-    t.integer "phone_number"
+    t.integer "telephone", null: false
+    t.bigint "order_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_send_addresses_on_order_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -91,4 +92,5 @@ ActiveRecord::Schema.define(version: 2023_02_01_113236) do
   add_foreign_key "items", "users"
   add_foreign_key "orders", "items"
   add_foreign_key "orders", "users"
+  add_foreign_key "send_addresses", "orders"
 end

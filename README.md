@@ -49,7 +49,7 @@
 ### Association
   belongs_to :item
   belongs_to :user
-  has_one :delivery
+  has_one :send_address
 
 ## send_addresses テーブル
 

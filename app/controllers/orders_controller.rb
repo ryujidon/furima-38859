@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!
 
 
   def index
@@ -9,11 +9,6 @@ class OrdersController < ApplicationController
       redirect_to  root_path
     end
   end
-
-  # def new
-  #   @order_send_address = OrderSendAddress.new
-  # end
-
 
   def create
 

@@ -3,19 +3,12 @@ RSpec.describe OrderSendAddress, type: :model do
   describe '購入の保存' do
     before do
       user = FactoryBot.create(:user)
-      @order_send_address = FactoryBot.build(:order_send_address, user_id: user.id)
+      item = FactoryBot.create(:item)
+      @order_send_address = FactoryBot.build(:order_send_address, user_id: user.id ,item_id:item.id)
     end
 
     context '内容に問題ない場合' do
       it 'すべての値が正しく入力されていれば保存できること' do
-        expect(@order_send_address).to be_valid
-      end
-      it 'cityは空でも保存できること' do
-        @order_send_address.city = ''
-        expect(@order_send_address).to be_valid
-      end
-      it 'addressは空でも保存できること' do
-        @order_send_address.address = ''
         expect(@order_send_address).to be_valid
       end
       it 'building_nameは空でも保存できること' do
@@ -40,10 +33,35 @@ RSpec.describe OrderSendAddress, type: :model do
         @order_send_address.valid?
           expect(@order_send_address.errors.full_messages).to include("Place can't be blank")
         end
+        it 'cityが空だと保存できないこと' do
+          @order_send_address.city = ''
+          @order_send_address.valid?
+          expect(@order_send_address.errors.full_messages).to include("City can't be blank")
+        end
+        it 'addressが空だと保存できないこと' do
+          @order_send_address.address = ''
+          @order_send_address.valid?
+          expect(@order_send_address.errors.full_messages).to include("Address can't be blank")
+        end
       it 'telephoneが空だと保存できないこと' do
         @order_send_address.telephone = ''
         @order_send_address.valid?
         expect(@order_send_address.errors.full_messages).to include("Telephone can't be blank")
+      end
+      it 'telephoneが9桁以下では購入できない' do
+        @order_send_address.telephone = '00000000'
+        @order_send_address.valid?
+        expect(@order_send_address.errors.full_messages).to include("Telephone is invalid. Include hyphen(-)")
+      end
+      it 'telephoneが12桁以上では購入できない' do
+        @order_send_address.telephone = '000000000000'
+        @order_send_address.valid?
+        expect(@order_send_address.errors.full_messages).to include("Telephone is invalid. Include hyphen(-)")
+      end
+      it 'telephoneに半角数字以外が含まれている場合は購入できない' do
+        @order_send_address.telephone = '000000000あ0'
+        @order_send_address.valid?
+        expect(@order_send_address.errors.full_messages).to include("Telephone is invalid. Include hyphen(-)")
       end
       it 'userが紐付いていないと保存できないこと' do
         @order_send_address.user_id = nil

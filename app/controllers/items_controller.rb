@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
 
   def index
     @item = Item.all.order(created_at: :desc)
+
   end
 
   def new
@@ -21,14 +22,15 @@ class ItemsController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
+    if @item.order.present?
+      redirect_to root_path
+    end  
   end  
 
   def update
-
        if @item.update(item_params)
          redirect_to item_path
        else
@@ -55,5 +57,5 @@ class ItemsController < ApplicationController
     if @item.user != current_user
     redirect_to  root_path
   end
-end
+  end
 end

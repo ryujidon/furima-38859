@@ -1,8 +1,13 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
+
 
   def index
     @order_send_address = OrderSendAddress.new
     @item = Item.find(params[:item_id])
+    if @item.order.present?
+      redirect_to  root_path
+    end
   end
 
   # def new
@@ -14,6 +19,7 @@ class OrdersController < ApplicationController
 
     @order_send_address = OrderSendAddress.new(order_params)
     @item = Item.find(params[:item_id])
+
     if @order_send_address.valid?
       pay_item
       @order_send_address.save
@@ -38,4 +44,5 @@ class OrdersController < ApplicationController
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
   end
+
 end

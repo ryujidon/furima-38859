@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only:[:create,:index]
   before_action :item_find, only:[:create,:index]
 
   def index

@@ -26,12 +26,12 @@ RSpec.describe OrderSendAddress, type: :model do
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @order_send_address.postal_code = '1234567'
         @order_send_address.valid?
-        expect(@order_send_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
+        expect(@order_send_address.errors.full_messages).to include("Postal code は-（ハイフン）を含めた半角数字で入力してください")
       end
       it 'placeを選択していないと保存できないこと' do
         @order_send_address.place_id = 1
         @order_send_address.valid?
-          expect(@order_send_address.errors.full_messages).to include("Place can't be blank")
+          expect(@order_send_address.errors.full_messages).to include("Place を選択してください")
         end
         it 'cityが空だと保存できないこと' do
           @order_send_address.city = ''
@@ -51,17 +51,17 @@ RSpec.describe OrderSendAddress, type: :model do
       it 'telephoneが9桁以下では購入できない' do
         @order_send_address.telephone = '00000000'
         @order_send_address.valid?
-        expect(@order_send_address.errors.full_messages).to include("Telephone is invalid. Include hyphen(-)")
+        expect(@order_send_address.errors.full_messages).to include("Telephone  は10桁〜11桁で半角数字のみで入力してください")
       end
       it 'telephoneが12桁以上では購入できない' do
         @order_send_address.telephone = '000000000000'
         @order_send_address.valid?
-        expect(@order_send_address.errors.full_messages).to include("Telephone is invalid. Include hyphen(-)")
+        expect(@order_send_address.errors.full_messages).to include("Telephone  は10桁〜11桁で半角数字のみで入力してください")
       end
       it 'telephoneに半角数字以外が含まれている場合は購入できない' do
         @order_send_address.telephone = '000000000あ0'
         @order_send_address.valid?
-        expect(@order_send_address.errors.full_messages).to include("Telephone is invalid. Include hyphen(-)")
+        expect(@order_send_address.errors.full_messages).to include("Telephone  は10桁〜11桁で半角数字のみで入力してください")
       end
       it 'userが紐付いていないと保存できないこと' do
         @order_send_address.user_id = nil
